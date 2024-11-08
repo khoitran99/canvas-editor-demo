@@ -20,7 +20,7 @@ class Editor extends Component {
       href: "",
       color: "#000000",
       canvasScale: 1,
-      backgroundImage: ""
+      backgroundImage: "",
     };
     this.container = React.createRef();
   }
@@ -32,12 +32,11 @@ class Editor extends Component {
       backgroundColor: "#FDEFEF",
       height: clientHeight,
       width: clientWidth,
-      preserveObjectStacking: true
+      preserveObjectStacking: true,
     });
 
     this.props.setCanvas({ canvas });
     this.setState({ canvas });
-
 
     document.addEventListener("keydown", this.onHandleKeyDown);
   }
@@ -57,7 +56,7 @@ class Editor extends Component {
         fontSize: 29,
         padding: 5,
         left: 0,
-        right: 0
+        right: 0,
       })
     );
   };
@@ -77,12 +76,12 @@ class Editor extends Component {
             },
             {
               scaleX: canvas.width / img.width,
-              scaleY: canvas.height / img.height
+              scaleY: canvas.height / img.height,
             }
           );
         }
-      },
-      { crossOrigin: "anonymous" }
+      }
+      // { crossOrigin: "anonymous" }
     );
     this.setState({ backgroundImage: url });
   };
@@ -232,7 +231,7 @@ class Editor extends Component {
     const { canvas } = this.state;
     const image = canvas.toDataURL({
       format: "png",
-      quality: 1
+      quality: 1,
     });
     this.setState({ href: image });
   };
@@ -282,7 +281,7 @@ class Editor extends Component {
           charSpacing,
           lineheight,
           text,
-          padding
+          padding,
         } = metadata;
         const textOptions = {
           ...baseOptions,
@@ -290,12 +289,12 @@ class Editor extends Component {
           ...(textAlign && { textAlign }),
           ...(fontFamily && { fontFamily }),
           ...(fontSize && {
-            fontSize: (fontSize * newCanvasWidth) / oldCanvasWidth
+            fontSize: (fontSize * newCanvasWidth) / oldCanvasWidth,
           }),
           ...(fontWeight && { fontWeight }),
           ...(charSpacing && { charSpacing }),
           ...(lineheight && { lineheight }),
-          ...(padding && { padding })
+          ...(padding && { padding }),
         };
         const element = new fabric.StaticText(textOptions);
         resolve(element);
@@ -347,7 +346,7 @@ class Editor extends Component {
       scaleX: (scaleX * newCanvasWidth) / oldCanvasWidth || 1,
       scaleY: (scaleY * newCanvasWidth) / oldCanvasWidth || 1,
       fill: fill || "#000000",
-      metadata: metadata
+      metadata: metadata,
     };
     return baseOptions;
   }
@@ -400,7 +399,7 @@ class Editor extends Component {
   };
 
   render() {
-    console.log(this.props.editorState)
+    console.log(this.props.editorState);
     let options = [];
     for (let i = 1; i < 17; i++) {
       options.push(
@@ -412,7 +411,6 @@ class Editor extends Component {
     }
     return (
       <div id="Canvas">
-
         <Navbar>
           <a
             download={"image.png"}
@@ -496,7 +494,7 @@ class Editor extends Component {
         <button
           onClick={() =>
             this.addBackground(
-              "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+              "https://original-bucket-name-080899.s3.ap-southeast-1.amazonaws.com/Screenshot+2024-11-01+at+16.04.52.png"
             )
           }
         >
@@ -541,7 +539,7 @@ class Editor extends Component {
               width: "100%",
               height: "100%",
               border: "2px solid black",
-              margin: "auto"
+              margin: "auto",
             }}
             ref={this.container}
           ></canvas>
@@ -550,16 +548,16 @@ class Editor extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    editorState: state.editor
+    editorState: state.editor,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setCanvas: (data) => {
       return dispatch(setCanvas(data));
-    }
+    },
   };
 };
 
